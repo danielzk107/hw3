@@ -23,6 +23,7 @@ int GetGematriaOfWord(char word[WORD]){
     return output;
 }
 void PrintAllGematria(char word[WORD], char text[TXT], int sizeoftext){
+    //DOES NOT WORK PROPERLY
     int gematria= GetGematriaOfWord(word);
     int foundfirst=0;
     printf("Gematria Sequences: ");
