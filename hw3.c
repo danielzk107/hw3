@@ -6,42 +6,39 @@
 #define WORD 30
 
 int GetGematriaOfLetter(char let){
-    int output= let-64;
-    if(output>26){
-        output=output-32;
-    }
-    return output;
+    if (!isalpha(let)) return 0;
+    return tolower(let) - 'a' + 1;
 }
-int GetGematriaOfWord(char word[WORD]){
+int GetGematriaOfWord(char word[WORD], int sizeofword){
     int output=0;
-    for (int i = 0; i < WORD; i++)
+    int tmp;
+    for (int i = 0; i < sizeofword; i++)
     {
-       if(isalpha(word[i])){
-           output+=GetGematriaOfLetter(word[i]);
-       }
+    	output+= GetGematriaOfLetter(word[i]);
     }
     return output;
 }
-void PrintAllGematria(char word[WORD], char text[TXT], int sizeoftext){
-    //DOES NOT WORK PROPERLY
-    int gematria= GetGematriaOfWord(word);
-    int foundfirst=0;
+void PrintAllGematria(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
+    int gematria= GetGematriaOfWord(word, sizeofword); // Get gem. of word
+    int foundfirst=0; // For wave printing
     printf("Gematria Sequences: ");
-    for(int i=0; i<sizeoftext;i++){
+    for(int i=0; i<sizeoftext;i++){ // We are checking combination with a spesific char each time.
+        if (!isalpha(text[i])) // Ignore characters unalphabetic chars
+		continue;
+        
         int sum= 0;
-        int j= i;
-        while(sum<gematria &&j<sizeoftext){
-            if(isalpha(text[j])){
-                sum+=GetGematriaOfLetter(text[j]);
-            }
-            j++;
-        }
-        if(sum==gematria){
-            if(foundfirst>0){
+        int letGem;
+        int ends = i;
+        for(; ends < sizeoftext && sum < gematria; ends++){ // Go through all other letters and check for sum.
+        	letGem = GetGematriaOfLetter(text[ends]);
+        	if (sum + letGem > gematria) break;
+        	sum += letGem;
+        } 
+        if(sum==gematria){ // Print if we found the right sum.
+            if(foundfirst>0)
                 printf("~");
-            }
             foundfirst=1;
-            for (int k = i; k < j; k++)
+            for (int k = i; k < ends; k++) // Print word in range
             {
                 printf("%c", text[k]);
             }
@@ -206,14 +203,14 @@ int main(){
             textsize++;
         }
     }
-    // printf("\n");
-    // printf("%s\n", text);
-    // printf("word is %s\n", firstword);
-    PrintAllGematria(firstword, text, TXT);
+    //printf("\n");
+    //printf("%s\n", text);
+    //printf("word is %s\n", firstword);
+    PrintAllGematria(firstword, text, textsize, firstwordsize);
     printf("\n"); 
-    // Atbash(firstword, text, textsize, firstwordsize);
-    // NewPrintAnagrams(firstword, text, textsize, firstwordsize);
+    Atbash(firstword, text, textsize, firstwordsize);
+    NewPrintAnagrams(firstword, text, textsize, firstwordsize);
     
-    // char output[WORD]= GetAtbashOfWord(firstword);
-    // printf("%s\n", output);
+    //char output[WORD] =GetAtbashOfWord(firstword);
+    //printf("%s\n", output);
 }
