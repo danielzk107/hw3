@@ -5,11 +5,11 @@
 #define TXT 1024
 #define WORD 30
 
-int GetGematriaOfLetter(char let){
+int GetGematriaOfLetter(char let){//Returns the value of the given letter in Gematria
     if (!isalpha(let)) return 0;
     return tolower(let) - 'a' + 1;
 }
-int GetGematriaOfWord(char word[WORD], int sizeofword){
+int GetGematriaOfWord(char word[WORD], int sizeofword){//Returns the value of the given word in Gematria
     int output=0;
     for (int i = 0; i < sizeofword; i++)
     {
@@ -44,7 +44,7 @@ void PrintAllGematria(char word[WORD], char text[TXT], int sizeoftext, int sizeo
         }
     }
 }
-char* GetAtbashOfWord(char word[WORD]){
+char* GetAtbashOfWord(char word[WORD]){//Switches the given array to its Atbash variant and returns it as a pointer
     for (int i = 0; i < WORD; i++)
     {
         if(word[i]>='A' &&word[i]<='Z'){
@@ -78,7 +78,6 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
         for (int j = i; j < sizeofword+i && j< sizeoftext; j++)//checks for the regular order:
         {
             if(text[j]!=' ' && text[j]!=atbashword[counter]){
-                // printf("The condition is false\n");
                 condition=0;
                 break;
             }
@@ -91,7 +90,6 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
             foundfirst=1;
             for (int j = i; j < i+sizeofword && j<sizeoftext; j++)
             {
-                // printf("j is %d and i is %d\n", j, i);
                 printf("%c", text[j]);
             }
         }//reset variables for the next traversal:
@@ -100,7 +98,6 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
         for (int j = i; j < sizeofword+i &&j< sizeoftext; j++)//checks for the reverse order:
         {
             if(text[j]!=' ' && text[j]!=atbashword[counter]){
-                // printf("The condition is false for the reverse traversal\n");
                 condition=0;
                 break;
             }
@@ -120,18 +117,16 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
     printf("\n");
 }
 
-int IsIn(char word[WORD], char letter){
+int IsIn(char word[WORD], char letter){//This function returns the index of a given letter in the respective given array (if the letter does not reside in the array, the function shall return -1)
     for(int i=0; i<WORD;i++){
         if(word[i]==letter){
-            // printf("The letter %c is at index %d\n", letter, i);
             return i;
         }
     }
-    // printf("The letter %c is not in word %s\n", letter, word);
     return -1;
 }
 
-void SetArray(char original[WORD], char output[WORD], int wordsize){
+void SetArray(char original[WORD], char output[WORD], int wordsize){//Duplicates the origina larray into the output array
     for(int i=0; i<wordsize;i++){
         output[i]= original[i];
     }
@@ -187,18 +182,18 @@ int main(){
     int firstwordsize=0;
     char c;
     memset(text, 0, TXT);
-    while(firstwordsize<WORD && c!='~' && c!=' ' && c!='\t' && c!='\n'){
+    while(firstwordsize<WORD && c!='~' && c!=' ' && c!='\t' && c!='\n'){//Getting the first word, which will end in a new line, tab , space, or '~'
         c=getchar(); 
         if(c!='~'&& c!=' ' && c!='\t' && c!='\n'){
             firstword[firstwordsize]=c;
             firstwordsize++;
         }
     }
-    while(textsize<TXT && c!='~'){
+    while(textsize<TXT && c!='~'){//Getting the rest of the inputted text, which will end in the character '~'
         c= getchar();
-        if(c==EOF){
-            break;
-        }
+        // if(c==EOF){
+        //     break;
+        // }
         if(c!='~'){
             text[textsize]=c;
             textsize++;
