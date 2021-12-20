@@ -209,21 +209,5 @@ int main(){
     printf("\n"); 
     Atbash(firstword, text, textsize, firstwordsize);
     NewPrintAnagrams(firstword, text, textsize, firstwordsize);
-    // while(c!=EOF){
-    //     while(textsize<TXT && c!='~'){
-    //         c= getchar();
-    //         if(c==EOF){
-    //             break;
-    //         }
-    //         if(c!='~'){
-    //             text[textsize]=c;
-    //             textsize++;
-    //         }
-    //     }
-    //     PrintAllGematria(firstword, text, textsize, firstwordsize);
-    //     printf("\n"); 
-    //     Atbash(firstword, text, textsize, firstwordsize);
-    //     NewPrintAnagrams(firstword, text, textsize, firstwordsize);
-    //     c=getchar();
-    // }
+    printf("\n");
 }
