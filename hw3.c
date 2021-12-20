@@ -11,7 +11,6 @@ int GetGematriaOfLetter(char let){
 }
 int GetGematriaOfWord(char word[WORD], int sizeofword){
     int output=0;
-    int tmp;
     for (int i = 0; i < sizeofword; i++)
     {
     	output+= GetGematriaOfLetter(word[i]);
