@@ -93,7 +93,7 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
             for (int j = i; j < i+sizeofword && j<sizeoftext; j++)
             {
                 // printf("j is %d and i is %d\n", j, i);
-                printf("%c the index is %d ", text[j],j);
+                printf("%c", text[j]);
             }
         }//reset variables for the next traversal:
         condition=1;
@@ -114,7 +114,7 @@ void Atbash(char word[WORD], char text[TXT], int sizeoftext, int sizeofword){
             foundfirst=1;
             for (int j = i; j < i+sizeofword &&j<sizeoftext; j++)
             {
-                printf("%c the index is %d ", text[j],j);
+                printf("%c", text[j]);
             }
         }
     }
@@ -198,19 +198,33 @@ int main(){
     }
     while(textsize<TXT && c!='~'){
         c= getchar();
+        if(c==EOF){
+            break;
+        }
         if(c!='~'){
             text[textsize]=c;
             textsize++;
         }
     }
-    //printf("\n");
-    //printf("%s\n", text);
-    //printf("word is %s\n", firstword);
     PrintAllGematria(firstword, text, textsize, firstwordsize);
     printf("\n"); 
     Atbash(firstword, text, textsize, firstwordsize);
     NewPrintAnagrams(firstword, text, textsize, firstwordsize);
-    
-    //char output[WORD] =GetAtbashOfWord(firstword);
-    //printf("%s\n", output);
+    // while(c!=EOF){
+    //     while(textsize<TXT && c!='~'){
+    //         c= getchar();
+    //         if(c==EOF){
+    //             break;
+    //         }
+    //         if(c!='~'){
+    //             text[textsize]=c;
+    //             textsize++;
+    //         }
+    //     }
+    //     PrintAllGematria(firstword, text, textsize, firstwordsize);
+    //     printf("\n"); 
+    //     Atbash(firstword, text, textsize, firstwordsize);
+    //     NewPrintAnagrams(firstword, text, textsize, firstwordsize);
+    //     c=getchar();
+    // }
 }
