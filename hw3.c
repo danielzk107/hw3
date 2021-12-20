@@ -178,7 +178,6 @@ void NewPrintAnagrams(char word[WORD], char text[TXT], int textsize, int wordsiz
             printf("%s", op);
         }
     }
-    printf("\n");
 }
 
 int main(){
@@ -209,5 +208,4 @@ int main(){
     printf("\n"); 
     Atbash(firstword, text, textsize, firstwordsize);
     NewPrintAnagrams(firstword, text, textsize, firstwordsize);
-    printf("\n");
 }
